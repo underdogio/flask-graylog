@@ -9,7 +9,9 @@ This is a Flask_ extension that allows you to configure a Graylog_ log handler a
 Installation
 ------------
 
-You can install it via `pip`: ::
+You can install it via `pip`:
+
+.. code:: bash
 
     pip install Flask-Graylog
 
@@ -17,7 +19,9 @@ You can install it via `pip`: ::
 Usage
 -----
 
-You only need to import and initialize your app ::
+You only need to import and initialize your app
+
+.. code:: python
 
     # Import dependencies
     from flask import Flask
@@ -42,7 +46,9 @@ You only need to import and initialize your app ::
 Configuration options
 ~~~~~~~~~~~~~~~~~~~~~
 
-The following options can be use to configure the graylog logger. ::
+The following options can be use to configure the graylog logger.
+
+.. code:: python
 
     from flask import Flask
     from flask.ext.graylog import Graylog
@@ -57,9 +63,9 @@ The following options can be use to configure the graylog logger. ::
     config = {'GRAYLOG_HOST': '10.1.1.1'}
     graylog = Graylog(app, config=config)
 
-* `GRAYLOG_HOST` - the host to send messages to [default: 'localhost']
-* `GRAYLOG_PORT` - the port to send messages to [default: 12201]
-* `GRAYLOG_FACILITY` - the facility to report with [default: 'flask']
-* `GRAYLOG_EXTRA_FIELDS` - a dict of extra static fields to include with each message [default: None]
-* `GRAYLOG_ADD_DEBUG_FIELDS` - whether extra python debug fields should be added to each message [default: True]
-* `GRAYLOG_CONFIGURE_MIDDLEWARE` - whether to setup middleware to log each response [default: True]
+* ``GRAYLOG_HOST`` - the host to send messages to [default: 'localhost']
+* ``GRAYLOG_PORT`` - the port to send messages to [default: 12201]
+* ``GRAYLOG_FACILITY`` - the facility to report with [default: 'flask']
+* ``GRAYLOG_EXTRA_FIELDS`` - a dict of extra static fields to include with each message [default: None]
+* ``GRAYLOG_ADD_DEBUG_FIELDS`` - whether extra python debug fields should be added to each message [default: True]
+* ``GRAYLOG_CONFIGURE_MIDDLEWARE`` - whether to setup middleware to log each response [default: True]
