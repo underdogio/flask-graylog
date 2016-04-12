@@ -37,7 +37,7 @@ class Graylog(logging.Logger):
           GRAYLOG_HOST - the host to send messages to [default: 'localhost']
           GRAYLOG_PORT - the port to send messages to [default: 12201]
           GRAYLOG_FACILITY - the facility to report with [default: 'flask']
-          GRAYLOG_EXTRA_FIELDS - a dict of extra static fields to include with each message [default: None]
+          GRAYLOG_EXTRA_FIELDS - whether or not to include `extra` fields from the message [default: True]
           GRAYLOG_ADD_DEBUG_FIELDS - whether extra python debug fields should be added to each message [default: True]
           GRAYLOG_CONFIGURE_MIDDLEWARE - whether to setup middleware to log each response [default: True]
 
@@ -58,7 +58,7 @@ class Graylog(logging.Logger):
         self.config.setdefault('GRAYLOG_HOST', 'localhost')
         self.config.setdefault('GRAYLOG_PORT', 12201)
         self.config.setdefault('GRAYLOG_FACILITY', 'flask')
-        self.config.setdefault('GRAYLOG_EXTRA_FIELDS', None)
+        self.config.setdefault('GRAYLOG_EXTRA_FIELDS', True)
         self.config.setdefault('GRAYLOG_ADD_DEBUG_FIELDS', True)
         self.config.setdefault('GRAYLOG_CONFIGURE_MIDDLEWARE', True)
 
@@ -85,8 +85,6 @@ class Graylog(logging.Logger):
         """Middleware handler to record start time of each request"""
         # Record request start time, so we can get response time later
         g.graylog_start_time = time.time()
-        self.debug('Handling request for "%s %s" from %s' %
-                   (request.method, request.url, request.environ.get('REMOTE_ADDR', '-')))
 
     def after_request(self, response):
         """Middleware helper to report each flask response to graylog"""
@@ -98,14 +96,32 @@ class Graylog(logging.Logger):
 
         # Extra metadata to include with the message
         extra = {
-            'endpoint': str(request.endpoint).lower(),
-            'environ': dict((key.lower(), value) for key, value in request.environ),
+            'flask': {
+                'endpoint': str(request.endpoint).lower(),
+                'view_args': request.view_args,
+            },
             'response': {
-                'headers': dict((key.replace('-', '_').lower(), value) for key, value in response.headers),
+                'headers': dict(
+                    (key.replace('-', '_').lower(), value)
+                    for key, value in response.headers
+                    if key.lower() not in ('cookie', )
+                ),
                 'status_code': response.status_code,
                 'time_ms': elapsed,
             },
-            'view_args': request.view_args,
+            'request': {
+                'content_length': request.environ.get('CONTENT_LENGTH'),
+                'content_type': request.environ.get('CONTENT_TYPE'),
+                'method': request.environ.get('REQUEST_METHOD'),
+                'path_info': request.environ.get('PATH_INFO'),
+                'query_string': request.environ.get('QUERY_STRING'),
+                'remote_addr': request.environ.get('REMOTE_ADDR'),
+                'headers': dict(
+                    (key[5:].replace('-', '_').lower(), value)
+                    for key, value in request.environ.iteritems()
+                    if key.startswith('HTTP_') and key.lower() not in ('http_cookie', )
+                )
+            },
         }
 
         message = 'Finishing request for "%s %s" from %s' % (request.method, request.url, extra.get('remote_addr', '-'))
