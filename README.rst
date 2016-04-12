@@ -1,8 +1,10 @@
 Flask-Graylog
 =============
 
-This is a [Flask](http://flask.pocoo.org/) extension that allows you to configure a [Graylog](https://graylog.org/) log handler as well as configuring middleware to log every request/response to Graylog.
+This is a Flask_. extension that allows you to configure a Graylog_. log handler as well as configuring middleware to log every request/response to Graylog.
 
+.. _Flask: http://flask.pocoo.org/
+.. _Graylog: https://graylog.org
 
 Installation
 ------------
