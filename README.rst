@@ -69,3 +69,57 @@ The following options can be use to configure the graylog logger.
 * ``GRAYLOG_EXTRA_FIELDS`` - a dict of extra static fields to include with each message [default: None]
 * ``GRAYLOG_ADD_DEBUG_FIELDS`` - whether extra python debug fields should be added to each message [default: True]
 * ``GRAYLOG_CONFIGURE_MIDDLEWARE`` - whether to setup middleware to log each response [default: True]
+
+
+Example message format
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: json
+
+   {
+        "_process_name": "MainProcess",
+        "_request": {
+            "content_length": "",
+            "remote_addr": "127.0.0.1",
+            "headers": {
+                "upgrade_insecure_requests": "1",
+                "connection": "keep-alive",
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                "dnt": "1",
+                "host": "localhost:5000",
+                "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36",
+                "accept_language": "en-US,en;q=0.8,ms;q=0.6",
+                "cache_control": "max-age=0",
+                "accept_encoding": "gzip, deflate, sdch"
+            },
+            "path_info": "/",
+            "content_type": "",
+            "query_string": "",
+            "method": "GET"
+        },
+        "level": 6,
+        "_logger": "flask_graylog",
+        "timestamp": 1460502169.950895,
+        "_pid": 6010,
+        "facility": "flask",
+        "_function": "after_request",
+        "_thread_name": "Thread-1",
+        "host": "voltaire.local",
+        "version": "1.0",
+        "file": "Flask-Graylog/flask_graylog.py",
+        "full_message": "Finishing request for \"GET http://localhost:5000/\" from -",
+        "line": 130,
+        "_response": {
+            "headers": {
+                "content_length": "6",
+                "content_type": "text/html; charset=utf-8"
+            },
+            "time_ms": 0,
+            "status_code": 200
+        },
+        "_flask": {
+            "view_args": {},
+            "endpoint": "root"
+        },
+        "short_message": "Finishing request for \"GET http://localhost:5000/\" from -"
+    }
