@@ -66,7 +66,7 @@ The following options can be use to configure the graylog logger.
 * ``GRAYLOG_HOST`` - the host to send messages to [default: 'localhost']
 * ``GRAYLOG_PORT`` - the port to send messages to [default: 12201]
 * ``GRAYLOG_FACILITY`` - the facility to report with [default: 'flask']
-* ``GRAYLOG_EXTRA_FIELDS`` - a dict of extra static fields to include with each message [default: None]
+* ``GRAYLOG_EXTRA_FIELDS`` - whether or not to include the `extra` data from each message [default: True]
 * ``GRAYLOG_ADD_DEBUG_FIELDS`` - whether extra python debug fields should be added to each message [default: True]
 * ``GRAYLOG_CONFIGURE_MIDDLEWARE`` - whether to setup middleware to log each response [default: True]
 
