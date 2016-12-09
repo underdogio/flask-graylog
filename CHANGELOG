@@ -1,0 +1,10 @@
+2016-12-09 v1.1.0
+
+	* Replace usage of of `.iteritems()` with `.items()`
+
+	* Now Python 3 compatible
+
+
+2016-04-12 v1.0.0
+
+	* Initial release
