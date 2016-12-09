@@ -118,7 +118,7 @@ class Graylog(logging.Logger):
                 'remote_addr': request.environ.get('REMOTE_ADDR'),
                 'headers': dict(
                     (key[5:].replace('-', '_').lower(), value)
-                    for key, value in request.environ.iteritems()
+                    for key, value in request.environ.items()
                     if key.startswith('HTTP_') and key.lower() not in ('http_cookie', )
                 )
             },
