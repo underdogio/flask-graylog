@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='Flask-Graylog',
-    version='1.0.0',
+    version='1.1.0',
     url='https://github.com/underdogio/flask-graylog.git',
     license='MIT',
     author='Brett Langdon',
