@@ -1,3 +1,8 @@
+2017-07-13 v1.1.2
+
+	* Update project for newest pypi.org API
+
+
 2017-07-13 v1.1.1
 
 	* Bug fix: Not passing config object through to `init_app()`
