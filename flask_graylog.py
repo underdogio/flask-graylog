@@ -26,7 +26,7 @@ class Graylog(logging.Logger):
 
         # If we have an app, then call `init_app` automatically
         if app is not None:
-            self.init_app(app)
+            self.init_app(app, self.config)
 
     def init_app(self, app, config=None):
         """
