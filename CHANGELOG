@@ -1,3 +1,8 @@
+2017-07-13 v1.1.1
+
+	* Bug fix: Not passing config object through to `init_app()`
+
+
 2016-12-09 v1.1.0
 
 	* Replace usage of of `.iteritems()` with `.items()`
